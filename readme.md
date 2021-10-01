@@ -155,6 +155,8 @@ ln -s ../../dsp/drone_001 dsp
 - change the firmware loading a new one from SD
 - optimize I2C write operations (for LEDSs)
 - extend drawing functionalities
+- presets on SD card
+- samples support
 - write tutorial and documentation
 
 ## Credits
