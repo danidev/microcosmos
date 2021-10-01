@@ -28,23 +28,111 @@ The audio DSP part is done with the [FAUST](https://faust.grame.fr/) language.
 
 ### Compile and run
 
-In order to use the firmware, you have to open the *microcosmos-v2.5.ino* with the Teensyduino then compile and upload targeting the Teensy 4.0 platform.
+In order to use the firmware, you have to open the **microcosmos-v2.5.ino** with the Teensyduino then compile and upload targeting the Teensy 4.0 platform.
 
 ### Change the DSP
 
-On the *dsp* folder are placed some test scripts. Every test script must have its own *mapping.h* file to map the controls of the board to the FAUST params.
+On the **dsp** folder are placed some test scripts. Every test script must have its own **mapping.h** file to map the controls of the board to the FAUST params.
+
+#### Export the FAUST script to Teensy
 
 The script must be exported for the Teensy architecture and this can be done in several ways, the easiest one is using the [FAUST Web IDE](https://faustide.grame.fr/) or the [FAUST Web Editor](https://faustide.grame.fr/), alternatively you can clone and install FAUST from the [Git repository](https://github.com/grame-cncm/faust) and run the faust2teensy command.
 
-After exporting the DSP script to the MicrocosmosDsp folder, you can include it in the microcosmos firmware. There is a *dsp.sh* bash script (linux and macos) to symlink the folder into the project folder, for instance:
+#### Mapping Parameters
+
+The mapping.h file is where the mapping beetween the FAUST parameters and the Microcosmos controls is defined, here is an example:
+
+```
+// EDIT THIS SECTION TO MAP DSP PARAMETERS
+#define DSP "drone_001"             // dsp name used to store presets
+#define VERSION "0"                 // (further use)
+#define MENU_PAGES_LENGTH 4         // number of pages
+#define PARAMS_PER_PAGE 4           // how many params are shown on a page
+#define BUTTONS_MAPPING_LENGHT 10   // number of button mappings, default is 10
+#define MIDI_NOTE_ENABLED false     // enable only if there are gate/note params
+#define MIDI_CC_ENABLED true        // enable if params can be used by MIDI CC
+
+#define MENU_PARAMS_LENGTH MENU_PAGES_LENGTH * PARAMS_PER_PAGE
+
+// EVERY PAGE OF THE MENU MUST HAVE A STRING TITLE
+const char* const PAGE_TITLES[MENU_PAGES_LENGTH] = {
+  "VOICE 1",
+  "VOICE 2",
+  "VOICE 3",
+  "DELAY"
+};
+
+// MENU PARAMETERS LIST
+const MenuParam MENU_PARAMS[MENU_PARAMS_LENGTH] = {
+  // faust param, display name, default value, min value, max value, CC
+  {"V1 NOTE", "NOTE", 69, 0, 127, 21},
+  {"V1 LFO FREQ", "LFO FREQ", 1, 0, 80, 22},
+  {"V1 LFO DEEP", "LFO DEEP", 0, 0, 1, 23},
+  {"V1 VOLUME", "VOLUME", 0.1, 0, 0.9, 24},
+
+  {"V2 NOTE", "NOTE", 69, 0, 127, 25},
+  {"V2 LFO FREQ", "LFO FREQ", 1, 0, 80, 26},
+  {"V2 LFO DEEP","LFO DEEP", 0, 0, 1, 27},
+  {"V2 VOLUME", "VOLUME", 0.1, 0, 0.9, 28},
+
+  {"V3 NOTE", "NOTE", 69, 0, 127, 41},
+  {"V3 LFO FREQ", "LFO FREQ", 1, 0, 80, 42},
+  {"V3 LFO DEEP","LFO DEEP", 0, 0, 1, 43},
+  {"V3 VOLUME", "VOLUME", 0.1, 0, 0.9, 44},
+
+  {"TIME", "TIME", 250, 0, 1000, 45},
+  {"FEEDBACK", "FEEDBACK", 0.5, 0.0, 1.0, 46},
+  {"AMOUNT","AMOUNT", 0.5, 0.0, 1.0, 47},
+  {"", "", 0, 0, 0, 0},
+};
+
+const ButtonMapping BUTTONS_MAPPING[BUTTONS_MAPPING_LENGHT] = {
+  // encoder buttons
+  {1, BUTTON_MODE_MENU_DOWN},
+  {0},
+  {0},
+  {0},
+  {0},
+  // buttons
+  {1, BUTTON_MODE_MENU_UP},
+  {2, BUTTON_MODE_SINGLE, "gate", 64},
+  {0},
+  {0},
+  {0},
+};
+
+// mode; param1[16]; min; max;
+const LedsMapping LEDS_MAPPING[MENU_PAGES_LENGTH] = {
+  {0},
+  {0},
+  {0},
+  {0}
+};
+
+const byte FG_COLOR[3] {
+  0x00, 0xFF, 0x00
+};
+```
+
+All those variables must be set in order to compile the firmware without errors.
+
+#### Link the DSP resources to the firmware
+
+After exporting the DSP script to the MicrocosmosDsp folder and mapping the parameters, you can include it in the microcosmos firmware.
+There is a **dsp.sh** bash script (linux and macos) to symlink the folder into the project folder, for instance:
 
 ```
 dsp.sh drone_01
-``` 
+```
 
-This Will symlink the content of **dsp/drone_01/dsp** folder to microcosmos-v2.5/src/dsp   
+This Will symlink the content of **dsp/drone_01/dsp** folder to **microcosmos-v2.5/src/dsp**
 
+arternatively you can do it by:
 
+```
+cd microcosmos-v2.5/src
+ln -s ../../dsp/drone_001 dsp
+```
 
 ## Credits
 
