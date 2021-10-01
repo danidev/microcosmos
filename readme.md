@@ -16,8 +16,7 @@ The audio DSP part is done with the [FAUST](https://faust.grame.fr/) language.
 
 ### Additional libraries
 
-- [Adafruit SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
-- [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
+- [Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library)
 
 ## Directory structure
 
@@ -147,6 +146,16 @@ arternatively you can do it by:
 cd microcosmos-v2.5/src
 ln -s ../../dsp/drone_001 dsp
 ```
+
+## TODO
+
+- fix encoders sensitivity (when turned too fast and then turned on the opposite direction the value doesn't change correctly)
+- MIDI IN and OUT on serial port implementation
+- find a way to overcome the mapping.h file with better FAUST integration
+- change the firmware loading a new one from SD
+- optimize I2C write operations (for LEDSs)
+- extend drawing functionalities
+- write tutorial and documentation
 
 ## Credits
 
