@@ -34,6 +34,20 @@ In order to use the firmware, you have to open the **microcosmos-v2.5.ino** with
 
 On the **dsp** folder are placed some test scripts. Every test script must have its own **mapping.h** file to map the controls of the board to the FAUST params.
 
+### DSP folder structure
+
+the folder that contains the resources of a dsp must have this structure
+
+```
+name_of_the_dsp           -> main folder
+  dsp                     -> dsp containing folder (will be linked to the FW)
+    MicrocosmosDsp        -> folder of the exported C++ FAUST DSP code
+      MicrocosmosDsp.cpp  
+      MicrocosmosDsp.h
+    mapping.h             -> mapping file
+    MicrocosmosDsp.dsp    -> the FAUST script
+```
+
 #### Export the FAUST script to Teensy
 
 The script must be exported for the Teensy architecture and this can be done in several ways, the easiest one is using the [FAUST Web IDE](https://faustide.grame.fr/) or the [FAUST Web Editor](https://faustide.grame.fr/), alternatively you can clone and install FAUST from the [Git repository](https://github.com/grame-cncm/faust) and run the faust2teensy command.
