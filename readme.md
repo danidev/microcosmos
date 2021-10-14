@@ -4,7 +4,8 @@
 **THIS IS A TEMPORARY REPOSITORY OF THE LAST PROTOTYPE.**
 The official repository of this project will be published when the Microcosmos will be ready to production.
 
----
+---![microcosmos_panel](https://user-images.githubusercontent.com/4963780/137288007-3839c66b-f938-47f7-9baa-17c5f186b67f.jpg)
+
 
 Microcosmos is a small (130X80mm) open-source electronic instrument, developed by Faselunare (Italy), aimed at prototyping electronic musical instruments and learning electronics, microcontroller programming and audio DSP.
 
