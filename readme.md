@@ -9,9 +9,17 @@ The official repository of this project will be published when the Microcosmos w
 
 Microcosmos is a small (130X80mm) open-source electronic instrument, developed by Faselunare (Italy), aimed at prototyping electronic musical instruments and learning electronics, microcontroller programming and audio DSP.
 
-Microcosmos is made on top of a Teensy 4.1 board and features several encoders, buttons, it has an OLED color display, SD Card, audio I/O, MIDI I/O on Mini Jack and MIDI over USBHost.
-
+Microcosmos is made on top of a Teensy 4.1 board.
 The audio DSP part is done with the [FAUST](https://faust.grame.fr/) language.
+
+Main hardware features: 
+- 5 encoders with RGB LEDS, 
+- 5 backlit buttons, 
+- OLED color display, 
+- SD Card, 
+- audio I/O, 
+- MIDI I/O on Mini Jack 
+- MIDI over USBHost.
 
 ## Requirements
 
