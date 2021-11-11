@@ -186,4 +186,4 @@ This project is licensed under the terms of the GNU GENERAL PUBLIC LICENSE.
 
 ## Contacts
 
-Please, get in touch with us if are a developer, sound designer or hardware engieer and you want collaborate on this project.
+Please, get in touch with us if you are a developer, sound designer or hardware engineer and want to collaborate on this project.
