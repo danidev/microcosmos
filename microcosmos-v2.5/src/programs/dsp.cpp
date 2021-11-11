@@ -33,8 +33,6 @@ void dsp_setup() {
           value = dsp_encoder_to_param(&dsp_menu_params[i], eepromValue);
         }
 
-        Serial.printf("%s eeprom:%d value:%f\n", dsp_menu_params[i].param, eepromValue, value);
-
         dsp_menu_params[i].value = value;
         audio_set_param(dsp_menu_params[i].param, dsp_menu_params[i].value);
       }
@@ -217,11 +215,8 @@ void dsp_on_enc_change(uint8_t index, uint8_t value) {
     storage_eeprom_write(EEPROM_VOLUME, value);
   } else {
     // change param
-    MenuParam *p = dsp_get_page_param(index - 1);
 
-    if (p == NULL) {
-      return;
-    }
+    MenuParam *p = dsp_get_page_param(index - 1);
 
     if (strlen(p->param) > 0) {
       p->value = dsp_encoder_to_param(p, value);
@@ -270,7 +265,11 @@ void dsp_on_btn_change(uint8_t index, bool pressed) {
 }
 
 MenuParam* dsp_get_page_param(uint8_t num) {
-  return &dsp_menu_params[num + (dsp_page * MENU_PAGES_LENGTH)];
+  int i = num + (dsp_page * PARAMS_PER_PAGE);
+  Serial.printf("num=%d i=%d dsp_page=%d\n", num, i, dsp_page);
+  MenuParam* d = &dsp_menu_params[i];
+  Serial.printf("%s\n", d->param);
+  return d;
 }
 
 uint8_t dsp_param_to_encoder(MenuParam *menuParam) {

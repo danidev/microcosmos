@@ -57,6 +57,7 @@ void display_setup();
 
 void display_clear_screen();
 void display_clear_line(uint8_t line);
+void display_clear_lines();
 
 void display_draw_page_background();
 void display_draw_param_line(uint8_t line, const char *name, int value);
