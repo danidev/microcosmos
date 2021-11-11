@@ -36,6 +36,7 @@ Main hardware features:
 ## Directory structure
 
 - *dsp*: FAUST dsp scripts, exports for teensy and mapping files
+- *firmwares*: ready to flash firmwares with the teensy loader.
 - *microcosmos-v2.5*: current firmware source code
 
 ## How to use it
