@@ -84,6 +84,12 @@ void display_clear_line(uint8_t line) {
   }
 }
 
+void display_clear_lines() {
+  for (byte i=0; i<ENTRIES_COUNT; i++) {
+    display_clear_line(i);
+  }
+}
+
 void display_draw_page_background() {
   display_tft.fillRect(0, 0, display_width, display_line_height, display_fg_color);
   display_tft.fillRect(0, display_line_height, display_width, display_line_height * 5, display_bg_color);

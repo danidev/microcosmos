@@ -19,6 +19,8 @@
 #ifndef __MENU_PARAM__
 #define __MENU_PARAM__
 
+#include <Arduino.h>
+
 // MENU PARAMETER STRUCTURE
 struct MenuParam {
   char param[16];             // faust param name

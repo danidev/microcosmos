@@ -32,20 +32,9 @@
 #define BUTTON_MIDI_MODE_CC 2
 
 struct ButtonMapping {
-<<<<<<< HEAD
   byte type;
   byte mode;
   char param[16];
-=======
-  uint8_t type;
-  uint8_t mode;
-  char param1[16];
-  char param2[16];
-  byte param1PressedValue;
-  byte param2PressedValue;
-  byte param1ReleasedValue;
-  byte param2ReleasedValue;
->>>>>>> d50df7ed7718cca38ea4a6abf86687bb0ea44123
   byte midiNote;
   byte midiCC;
 };

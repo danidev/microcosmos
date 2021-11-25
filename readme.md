@@ -4,13 +4,22 @@
 **THIS IS A TEMPORARY REPOSITORY OF THE LAST PROTOTYPE.**
 The official repository of this project will be published when the Microcosmos will be ready to production.
 
----
+---![microcosmos_panel](https://user-images.githubusercontent.com/4963780/137288007-3839c66b-f938-47f7-9baa-17c5f186b67f.jpg)
+
 
 Microcosmos is a small (130X80mm) open-source electronic instrument, developed by Faselunare (Italy), aimed at prototyping electronic musical instruments and learning electronics, microcontroller programming and audio DSP.
 
-Microcosmos is made on top of a Teensy 4.1 board and features several encoders, buttons, it has an OLED color display, SD Card, audio I/O, MIDI I/O on Mini Jack and MIDI over USBHost.
-
+Microcosmos is made on top of a Teensy 4.1 board.
 The audio DSP part is done with the [FAUST](https://faust.grame.fr/) language.
+
+Main hardware features: 
+- 5 encoders with RGB LEDS, 
+- 5 backlit buttons, 
+- OLED color display, 
+- SD Card, 
+- audio I/O, 
+- MIDI I/O on Mini Jack 
+- MIDI over USBHost.
 
 ## Requirements
 
@@ -27,6 +36,7 @@ The audio DSP part is done with the [FAUST](https://faust.grame.fr/) language.
 ## Directory structure
 
 - *dsp*: FAUST dsp scripts, exports for teensy and mapping files
+- *firmwares*: ready to flash firmwares with the teensy loader.
 - *microcosmos-v2.5*: current firmware source code
 
 ## How to use it
@@ -173,3 +183,7 @@ Software developed by Daniele Pagliero.
 ## License
 
 This project is licensed under the terms of the GNU GENERAL PUBLIC LICENSE.
+
+## Contacts
+
+Please, get in touch with us if you are a developer, sound designer or hardware engineer and want to collaborate on this project.

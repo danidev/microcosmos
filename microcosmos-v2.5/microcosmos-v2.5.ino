@@ -18,6 +18,7 @@
 
 #include "src/programs/boot.h"
 #include "src/programs/dsp.h"
+#include "src/programs/light_show.h"
 
 #include "src/dsp/mapping.h"
 
@@ -45,6 +46,9 @@ int _write(int fd, const char *buf, int len) {
 */
 
 USBHost usbHost;
+USBHub hub1(usbHost);
+USBHub hub2(usbHost);
+USBHub hub3(usbHost);
 MIDIDevice midi1(usbHost);
 
 uint8_t program;            /**< current running program */
@@ -98,6 +102,7 @@ void setup() {
 
   boot_setup();
   dsp_setup();
+  lightshow_setup();
 
   delay(500);
 }
@@ -121,6 +126,9 @@ void loop() {
       case 1:
         dsp_loop(current, program);
         break;
+      case 2:
+        lightshow_loop(current, program);
+        break;
     }
 
     leds_update();
@@ -128,7 +136,11 @@ void loop() {
 }
 
 void onNoteOn(byte channel, byte note, byte velocity) {
-  // Serial.printf("note on %d %d %d\n", channel, note, velocity);
+  if (channel > 1) {
+    return;
+  }
+
+  Serial.printf("note on %d %d %d\n", channel, note, velocity);
   switch (program) {
     case 0:
       break;
@@ -139,6 +151,10 @@ void onNoteOn(byte channel, byte note, byte velocity) {
 }
 
 void onNoteOff(byte channel, byte note, byte velocity) {
+  if (channel > 1) {
+    return;
+  }
+
   switch (program) {
     case 0:
       break;
@@ -149,6 +165,12 @@ void onNoteOff(byte channel, byte note, byte velocity) {
 }
 
 void onControlChange(byte channel, byte control, byte value) {
+  Serial.printf("cc on %d %d %d\n", channel, control, value);
+
+  if (channel > 1) {
+    return;
+  }
+
   switch (program) {
     case 0:
       break;
@@ -171,9 +193,13 @@ void onEncoderChange(uint8_t index, uint8_t value) {
 void onButtonChange(uint8_t index, bool pressed) {
   switch (program) {
     case 0:
+      boot_on_btn_change(index, pressed);
       break;
     case 1:
       dsp_on_btn_change(index, pressed);
+      break;
+    case 2:
+      lightshow_on_btn_change(index, pressed);
       break;
   }
 }
