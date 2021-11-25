@@ -21,6 +21,29 @@
 
 #include "src/dsp/mapping.h"
 
+/**
+  This is a fix for fprintf used by FAUST exported code to not crash the Board
+*/
+#include <cstdio>
+
+auto &debugOut = Serial;
+
+extern "C" {
+int _write(int fd, const char *buf, int len) {
+  // Send both stdout and stderr to debugOut
+  if (fd == stdout->_file || fd == stderr->_file) {
+    return debugOut.write(reinterpret_cast<const uint8_t *>(buf), len);
+  }
+
+  // Doing the following keeps this compatible with Print.cpp's requirements
+  Print *p = reinterpret_cast<Print *>(fd);
+  return p->write(reinterpret_cast<const uint8_t *>(buf), len);
+}
+}
+/**
+  End fix
+*/
+
 USBHost usbHost;
 MIDIDevice midi1(usbHost);
 
